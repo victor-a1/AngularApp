@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express();
+var mysql = require("mysql")
 
 //Express 3
 //app.configure(function() {
@@ -8,6 +9,29 @@ var express = require('express'),
 
 //Express 4
 app.use(express.static(__dirname + '/'));
+
+/*
+* Configure MySQL parameters.
+*/
+var connection = mysql.createConnection({
+host : "localhost",
+user : "root",
+password : "ief0pieD75",
+database : "TeamWork"
+});
+
+/*Connecting to Database*/
+
+connection.connect(function(error){
+if(error)
+{
+console.log("Problem with MySQL"+error);
+}
+else
+{
+console.log("Connected with Database");
+}
+});
 
 app.get('/customers/:id', function(req, res) {
     var customerId = parseInt(req.params.id);
@@ -24,6 +48,19 @@ app.get('/customers/:id', function(req, res) {
 app.get('/customers', function(req, res) {
     res.json(customers);
     //res.json(500, { error: 'An error has occurred!' });
+});
+
+app.get('/users', function(req, res) {
+    connection.query("SELECT * from users",function(err,rows){
+        if(err)
+        {
+            console.log("Problem with MySQL"+err);
+        }
+        else
+        {
+            res.end(JSON.stringify(rows));
+        }
+    });
 });
 
 app.get('/orders', function(req, res) {
@@ -51,9 +88,11 @@ app.delete('/customers/:id', function(req, res) {
     res.json(data);
 });
 
+/*Start the Server*/
+
 app.listen(8080);
 
-console.log('Express listening on port 8080');
+console.log('Express and MySQL listening on port 8080');
 
         var customers = [
             {
