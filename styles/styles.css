@@ -28,3 +28,8 @@ main {
     color: red; 
     cursor: pointer;
 }
+
+.table {
+    margin-top: 50px;
+    box-shadow: 0 0 5px grey;
+}

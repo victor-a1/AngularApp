@@ -1,8 +1,9 @@
 {
-"name": "app",
-"version": "1.0.0",
-"dependencies": {
-"express": "~4.9.2",
-"mysql": "~2.5.0"
-}
+  "name": "app",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular-material": "^0.11.2",
+    "express": "~4.9.2",
+    "mysql": "~2.5.0"
+  }
 }
